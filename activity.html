@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>กิจกรรมที่เข้าร่วม | Khwan.dev</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(180deg, #e0f2f1 0%, #81d4fa 50%, #0288d1 100%);
+            background-size: 100% 200%;
+            animation: waveMove 10s ease-in-out infinite;
+            min-height: 100vh;
+        }
+        .dark body {
+            background: linear-gradient(180deg, #020617 0%, #1e293b 50%, #0f172a 100%);
+            background-size: 100% 200%;
+            animation: waveMove 10s ease-in-out infinite;
+        }
+        @keyframes waveMove {
+            0%, 100% { background-position: 0% 0%; }
+            50% { background-position: 0% 100%; }
+        }
+        .content-box {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12);
+        }
+        .dark .content-box {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+    </style>
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+        tailwind.config = { darkMode: 'class' }
+    </script>
+</head>
+<body class="text-gray-900 dark:text-gray-100 transition-colors duration-500">
+    <nav class="sticky top-0 z-50 backdrop-blur-2xl bg-white/30 dark:bg-black/30 border-b border-white/20">
+        <div class="max-w-6xl mx-auto px-6 py-6 flex justify-between items-center">
+            <a href="index.html" class="text-xl font-bold tracking-tighter">Khwan.dev</a>
+            <div class="flex items-center space-x-6 text-sm">
+                <a href="index.html" class="hover:text-blue-500">Home</a>
+                <a href="sop.html" class="hover:text-blue-500">แรงบันดาลใจ</a>
+                <a href="about.html" class="hover:text-blue-500">เกี่ยวกับฉัน</a>
+                <a href="activity.html" class="hover:text-blue-500">กิจกรรมที่เข้าร่วม</a>
+                <a href="certificates.html" class="hover:text-blue-500">เกียรติบัตร</a>
+                <a href="education.html" class="hover:text-blue-500">ประวัตการศึกษา</a>
+                <a href="game.html" class="hover:text-blue-500">Mini Game</a>
+                <a href="contact.html" class="hover:text-blue-500">Contact</a>
+                <button onclick="toggleTheme()" class="p-2 rounded-full bg-white/20 dark:bg-black/20 backdrop-blur">🌓</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-6 py-20">
+        <section class="content-box p-8 md:p-12">
+            <h1 class="text-4xl font-black tracking-tighter mb-8">กิจกรรมที่เข้าร่วม</h1>
+            <div class="grid gap-6 md:grid-cols-2">
+                <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <img src="images/AUCC20251.jpg" alt="กิจกรรมการแข่งขันด้านเทคโนโลยี" class="w-full h-64 md:h-72 object-cover object-center">
+                    <div class="p-6">
+                        <h2 class="text-2xl font-bold mb-2">การประชุมวิชาการระดับปริญญาตรีด้านคอมพิวเตอร์ภูมิภาคเอเชีย ครั้งที่ 13</h2>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-3">
+                            เข้าร่วมการแข่งขันด้านเทคโนโลยีและการพัฒนาซอฟต์แวร์ในระดับภูมิภาคเอเชีย เพื่อแลกเปลี่ยนความรู้และประสบการณ์กับนักศึกษาจากมหาลัยต่างๆ
+                        </p>
+                        <p class="text-sm text-blue-600 dark:text-blue-400 font-semibold">📅 วันที่เข้าร่วม: 19-21 กุมภาพันธ์ 2568</p>
+                    </div>
+                </article>
+
+                <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <img src="images/apple1.png" alt="กิจกรรมฝึกอบรมและพัฒนาตนเอง" class="w-full h-64 md:h-72 object-cover object-center">
+                    <div class="p-6">
+                        <h2 class="text-2xl font-bold mb-2">โครงการฝึกอบรมการใช้ ระบบปฏิบัติการ Mac os</h2>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-3">
+                            เข้าร่วมโครงการฝึกอบรมการใช้ระบบปฏิบัติการ Mac OS เพื่อเพิ่มทักษะในการใช้งานและการพัฒนาซอฟต์แวร์บนแพลตฟอร์ม Ecosystem ของ Apple
+                        </p>
+                        <p class="text-sm text-blue-600 dark:text-blue-400 font-semibold">📅 วันที่เข้าร่วม: 06 กรกฎาคม 2568</p>
+                    </div>
+                </article>
+
+                <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <img src="images/AWS.png" alt="กิจกรรมAWS" class="w-full h-64 md:h-72 object-cover object-center">
+                    <div class="p-6">
+                        <h2 class="text-2xl font-bold mb-2">AWS Cloud Quest: Generative Ai Practice</h2>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-3">
+                            เข้าร่วมกิจกรรมฝึกอบรมและพัฒนาทักษะด้าน Generative AI บนแพลตฟอร์ม AWS เพื่อเรียนรู้การสร้างโมเดล AI และการประยุกต์ใช้งานในโครงการจริง
+                        </p>
+                        <p class="text-sm text-blue-600 dark:text-blue-400 font-semibold">📅 วันที่เข้าร่วม: 12 ตุลาคม 2568</p>
+                    </div>
+                </article>
+
+                    <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <img src="images/COE1.jpeg" alt="กิจกรรมฝึกอบรมและพัฒนาตนเอง" class="w-full h-64 md:h-72 object-cover object-center">
+                    <div class="p-6">
+                        <h2 class="text-2xl font-bold mb-2">กีฬาสัมพันธ์วิศวกรรมคอมพิวเตอร์</h2>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-3">
+                            เข้าร่วมกิจกรรมกีฬาสัมพันธ์วิศวกรรมคอมพิวเตอร์ เพื่อสร้างความสัมพันธ์และความสามัคคีระหว่างนักศึกษาวิศวกรรมคอมพิวเตอร์จากมหาวิทยาลัยต่างๆ
+                        </p>
+                        <p class="text-sm text-blue-600 dark:text-blue-400 font-semibold">📅 วันที่เข้าร่วม: 14 กุมภาพันธ์ 2567</p>
+                    </div>
+                </article>
+
+                    <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <img src="images/AR5.JPG" alt="กิจกรรมฝึกอบรมและพัฒนาตนเอง" class="w-full h-64 md:h-72 object-cover object-center">
+                    <div class="p-6">
+                        <h2 class="text-2xl font-bold mb-2">กิจกรรมวิศวะอาสาช่วยเหลือน้องๆ</h2>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-3">
+                            ซ่อมแซมโรงเรียนให้กับน้องๆ วาดภาพผนังและปรับปรุงสภาพแวดล้อมของโรงเรียน เพื่อสร้างความสุขและแรงบันดาลใจให้กับนักเรียน
+                        </p>
+                        <p class="text-sm text-blue-600 dark:text-blue-400 font-semibold">📅 วันที่เข้าร่วม: 08 กันยายน 2566</p>
+                    </div>
+                </article>
+
+                    <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <img src="images/AR1.JPG" alt="กิจกรรมฝึกอบรมและพัฒนาตนเอง" class="w-full h-64 md:h-72 object-cover object-center">
+                    <div class="p-6">
+                        <h2 class="text-2xl font-bold mb-2">โครงการปลูกฝังจิตสำนึกรักสามัคคีและส่งเสริมสร้างความปรองดองสมานฉันท์</h2>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-3">
+                            เข้าร่วมโครงการปลูกฝังจิตสำนึกรักสามัคคีและส่งเสริมสร้างความปรองดองสมานฉันท์ เพื่อเรียนรู้และพัฒนาทักษะด้านการทำงานร่วมกันและการสร้างความสัมพันธ์ที่ดีในสังคม
+                        </p>
+                        <p class="text-sm text-blue-600 dark:text-blue-400 font-semibold">📅 วันที่เข้าร่วม: 2-4 มีนาคม 2565</p>
+                    </div>
+                </article>
+
+                    <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <img src="images/AR2.png" alt="กิจกรรมฝึกอบรมและพัฒนาตนเอง" class="w-full h-64 md:h-72 object-cover object-center">
+                    <div class="p-6">
+                        <h2 class="text-2xl font-bold mb-2">โครงการอบรมเชิงปฏิบัติการอิเล็กทรอนิกส์อัจฉริยะ</h2>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-3">
+                            กิจกรรมอบรมเชิงปฏิบัติการอิเล็กทรอนิกส์อัจฉริยะ เพื่อเรียนรู้และพัฒนาทักษะด้านการออกแบบและสร้างอุปกรณ์อิเล็กทรอนิกส์ที่สามารถทำงานได้อย่างชาญฉลาด
+                        </p>
+                        <p class="text-sm text-blue-600 dark:text-blue-400 font-semibold">📅 วันที่เข้าร่วม: 3 มีนาคม 2564</p>
+                    </div>
+                </article>
+
+                    <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <img src="images/AR3.png" alt="กิจกรรมฝึกอบรมและพัฒนาตนเอง" class="w-full h-64 md:h-72 object-cover object-center">
+                    <div class="p-6">
+                        <h2 class="text-2xl font-bold mb-2">กิจกรรมบริการซ่อมเพื่อประชาชน</h2>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-3">
+                            เข้าร่วมกิจกรรมบริการซ่อมเพื่อประชาชน เพื่อให้บริการซ่อมแซมอุปกรณ์อิเล็กทรอนิกส์และคอมพิวเตอร์แก่ประชาชนในชุมชน และสร้างความสัมพันธ์ที่ดีระหว่างนักศึกษาและชุมชน
+                        </p>
+                        <p class="text-sm text-blue-600 dark:text-blue-400 font-semibold">📅 วันที่เข้าร่วม: 30 มิถุนายน 2564</p>
+                    </div>
+                </article>
+
+                    <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <img src="images/AR4.png" alt="กิจกรรมฝึกอบรมและพัฒนาตนเอง" class="w-full h-64 md:h-72 object-cover object-center">
+                    <div class="p-6">
+                        <h2 class="text-2xl font-bold mb-2">แข่งขันทักษะวิชาชีพ ระดับชาติ Photoshop</h2>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-3">
+                            เข้าร่วมการแข่งขันทักษะวิชาชีพระดับชาติในสาขา Photoshop เพื่อทดสอบและพัฒนาทักษะด้านการออกแบบกราฟิกและการแก้ไขภาพดิจิทัล
+                        </p>
+                        <p class="text-sm text-blue-600 dark:text-blue-400 font-semibold">📅 วันที่เข้าร่วม: 18 กุมภาพันธ์ 2565</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+        }
+    </script>
+</body>
+</html>

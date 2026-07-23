@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Khwan Portfolio | Suphachoke Niyom</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* ฉากหลังคลื่นน้ำทะเล */
+        body {
+            background: linear-gradient(180deg, #e0f2f1 0%, #81d4fa 50%, #0288d1 100%);
+            background-size: 100% 200%;
+            animation: waveMove 10s ease-in-out infinite;
+        }
+        .dark body {
+            background: linear-gradient(180deg, #020617 0%, #1e293b 50%, #0f172a 100%);
+            background-size: 100% 200%;
+            animation: waveMove 10s ease-in-out infinite;
+        }
+        @keyframes waveMove {
+            0%, 100% { background-position: 0% 0%; }
+            50% { background-position: 0% 100%; }
+        }
+
+        /* เลเยอร์ไฟวิ่งรอบนอก */
+        .outer-glow {
+            position: relative;
+            background: linear-gradient(45deg, #38bdf8, #818cf8, #22d3ee, #38bdf8);
+            background-size: 300%;
+            padding: 8px; 
+            border-radius: 3.2rem;
+            animation: border-rotate 6s linear infinite;
+        }
+        @keyframes border-rotate {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        /* กล่องเนื้อหาหลัก */
+        .content-box {
+            background: #ffffff;
+            border-radius: 2.8rem;
+            width: 100%;
+            height: 100%;
+        }
+        .dark .content-box {
+            background: rgba(15, 23, 42, 0.85); 
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* กล่องคำคมแบบเลื่อนได้ */
+        .quote-box {
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 1.5rem;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .dark .quote-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .marquee-text {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 15s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+    </style>
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) { document.documentElement.classList.add('dark'); }
+        tailwind.config = { darkMode: 'class' }
+        window.addEventListener('DOMContentLoaded', () => {
+            const version = Date.now();
+            document.querySelectorAll('a[href]').forEach((link) => {
+                const href = link.getAttribute('href') || '';
+                if (!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('#')) return;
+                if (href.includes('v=')) return;
+                const separator = href.includes('?') ? '&' : '?';
+                link.setAttribute('href', `${href}${separator}v=${version}`);
+            });
+        });
+    </script>
+</head>
+<body class="text-gray-900 dark:text-gray-100 transition-colors duration-500 min-h-screen">
+    
+    <nav class="sticky top-0 z-50 backdrop-blur-2xl bg-white/30 dark:bg-black/30 border-b border-white/20">
+        <div class="max-w-6xl mx-auto px-6 py-6 flex justify-between items-center">
+            <a href="index.html" class="text-xl font-bold tracking-tighter">Khwan.dev</a>
+            <div class="flex items-center space-x-6 text-sm">
+                <a href="index.html" class="hover:text-blue-500">Home</a>
+                <a href="sop.html" class="hover:text-blue-500">แรงบันดาลใจ</a>
+                <a href="about.html" class="hover:text-blue-500">เกี่ยวกับฉัน</a>
+                <a href="activity.html" class="hover:text-blue-500">กิจกรรมที่เข้าร่วม</a>
+                <a href="certificates.html" class="hover:text-blue-500">เกียรติบัตร</a>
+                <a href="education.html" class="hover:text-blue-500">ประวัตการศึกษา</a>
+                <a href="game.html" class="hover:text-blue-500">Mini Game</a>
+                <a href="contact.html" class="hover:text-blue-500">Contact</a>
+                <button onclick="toggleTheme()" class="p-2 rounded-full bg-white/20 dark:bg-black/20 backdrop-blur">🌓</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-6 py-20">
+        <!-- ข้อมูลส่วนตัว -->
+        <div class="outer-glow mb-16">
+            <section class="content-box p-10 md:p-16 shadow-2xl">
+                <div class="flex flex-col md:flex-row gap-12 items-center">
+                    <div class="flex-shrink-0">
+                        <img src="images/P1.jpg" alt="Suphachoke Niyom" class="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover border-4 border-neutral-200 dark:border-neutral-800 shadow-xl">
+                    </div>
+                    <div>
+                        <h1 class="text-5xl font-black tracking-tighter mb-4">นายศุภโชค นิยม</h1>
+                        <p class="text-xl text-gray-600 dark:text-gray-400 mb-6">สาขา วิศวกรรมคอมพิวเตอร์ | จาก มหาวิทยาลัยเทคโนโลยีราชมงคลศรีวิชัย</p>
+                        <div class="grid md:grid-cols-2 gap-6 text-sm md:text-base">
+                            <p>📍 สงขลา, ไทย</p>
+                            <p>⚙️ รุ่น COE#16</p>
+                            <p>🧑🏻‍💻 IT Support</p>
+                            <p>💻 Field of Interest: Backend Development</p>
+                            <a href="https://www.linkedin.com/in/suphachoke-niyom-85183b3a0/" class="hover:text-blue-500">🌐 Linkedin</a>
+                            <a href="https://www.credly.com/users/suphachoke-niyom" class="hover:text-blue-500">📜 Credly</a>
+                        </div>
+                        <div class="mt-8">
+                            <a href="files/resume.pdf?v=1" target="_blank" class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full transition-all shadow-lg hover:scale-105">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                Download Resume
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- ส่วนคำคมวิ่งได้ -->
+                <div class="mt-12 p-6 quote-box italic">
+                    <div class="marquee-text font-bold text-lg">
+                        "ยินดีตอนรับสู่เว็บไซต์ นายศุภโชค นิยม" &nbsp;&nbsp; | &nbsp;&nbsp; "Welcome to the website of Mr. Suphachok Niyom." &nbsp;&nbsp; | &nbsp;&nbsp; "คติประจำตัว จงกระหาย และทำตัวโง่ตลอดเวลา" &nbsp;&nbsp; | &nbsp;&nbsp; "Stay Hungry, Stay Foolish"
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Technical Skills -->
+        <h2 class="text-4xl font-black tracking-tighter mb-12">ทักษะทางเทคนิค</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+            <div class="content-box p-8 border border-white/10 shadow-lg">
+                <h3 class="text-xl font-bold mb-4 text-blue-500">Networking 🌏</h3>
+                <ul class="space-y-2 text-sm">
+                    <li>✅ Cisco IOS & Packet Tracer</li>
+                    <li>✅ HSRP</li>
+                    <li>✅ OSPFv2 Multiarea</li>
+                    <li>✅ VLAN & IPv6 Addressing</li>
+                    <li>✅ Network Design</li>
+                </ul>
+            </div>
+            <div class="content-box p-8 border border-white/10 shadow-lg">
+                <h3 class="text-xl font-bold mb-4 text-pink-500">Web Development 🧑🏻‍💻</h3>
+                <ul class="space-y-2 text-sm">
+                    <li>✅ PHP & MySQL</li>
+                    <li>✅ HTML</li>
+                    <li>✅ CSS</li>
+                    <li>✅ JavaScript</li>
+                    <li>✅ Database Management</li>
+                </ul>
+            </div>
+            <div class="content-box p-8 border border-white/10 shadow-lg">
+                <h3 class="text-xl font-bold mb-4 text-emerald-500">Maintenance & Repair 🧑‍🔧</h3>
+                <ul class="space-y-2 text-sm">
+                    <li>✅ Computer Repair</li>
+                    <li>✅ Printer Maintenance</li>
+                    <li>✅ Electronic Components Troubleshooting</li>
+                </ul>
+            </div>
+                <div class="content-box p-8 border border-white/10 shadow-lg">
+                <h3 class="text-xl font-bold mb-4 text-emerald-500">Electrical Systems ⚡️</h3>
+                <ul class="space-y-2 text-sm">
+                    <li>✅ Solar Energy Systems</li>
+                    <li>✅ Power Management</li>
+                    <li>✅ Basic Electrical Wiring</li>
+                    <li>✅ Systems Maintenance</li>
+                </ul>
+            </div>
+                <div class="content-box p-8 border border-white/10 shadow-lg">
+                <h3 class="text-xl font-bold mb-4 text-emerald-500">Cloud & IoT ☁️</h3>
+                <ul class="space-y-2 text-sm">
+                    <li>✅ AWS (VPC, DynamoDB)</li>
+                    <li>✅ ESP32 & LoRa Mesh</li>
+                    <li>✅ Blynk IoT Platform</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- My Projects -->
+        <h2 class="text-4xl font-black tracking-tighter mb-12">ผลงานของฉัน</h2>
+        <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 gap-0"></div>
+    </main>
+
+    <footer class="text-center py-10 text-gray-500 text-sm border-t border-white/10">
+        <p>FB: Suphachoke Niyom | Tel: 0653617602</p>
+        <p class="mt-2">© 2026 Khwan.dev | 141/27 หมู่ 8 ถ.30เมตร ต.เขารูปช้าง จ.สงขลา</p>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+        document.documentElement.classList.toggle('dark');
+        localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    }
+
+    async function loadPortfolio() {
+        try {
+            const response = await fetch('data.json?t=' + Date.now(), { cache: 'no-store' });
+            const data = await response.json();
+            const fallbackImage = 'images/placeholder.svg';
+            
+            document.getElementById('portfolio-grid').innerHTML = data.map((item, i) => {
+                const itemId = item.id ?? item.slug ?? String(i);
+                const imageSrc = item.image || fallbackImage;
+                const title = item.title || 'Untitled Project';
+                return `
+                    <a href="project.html?id=${encodeURIComponent(itemId)}&v=${Date.now()}" class="bg-white dark:bg-neutral-900 p-6 rounded-3xl border border-neutral-200 dark:border-neutral-800 hover:scale-[1.02] transition-all hover:shadow-xl">
+                        <img src="${imageSrc}" onerror="this.onerror=null; this.src='${fallbackImage}';" class="w-full h-72 object-cover rounded-2xl mb-4">
+                        <h3 class="text-2xl font-bold">${title}</h3>
+                    </a>
+                `;
+            }).join('');
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    }
+    loadPortfolio();
+    </script>
+</body>
+</html>

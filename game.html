@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cute Dino Jump Adventure</title>
+    <style>
+        :root {
+            --bg-color: #f9f9fb;
+            --container-bg: #ffffff;
+            --text-color: #2c3e50;
+            --game-bg: #eef2f7;
+            --dino-color: #4ade80;
+            --obstacle-color: #f87171;
+            --obstacle-color-2: #fb923c;
+            --btn-bg: #6366f1;
+            --btn-hover: #4f46e5;
+            --border-color: #e2e8f0;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0f172a;
+            --container-bg: #1e293b;
+            --text-color: #f1f5f9;
+            --game-bg: #334155;
+            --dino-color: #22c55e;
+            --obstacle-color: #ef4444;
+            --obstacle-color-2: #f97316;
+            --btn-bg: #6366f1;
+            --btn-hover: #4f46e5;
+            --border-color: #475569;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--container-bg);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            position: relative;
+            border: 1px solid var(--border-color);
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--game-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .screen { display: none; }
+        .active { display: block !important; }
+
+        #game-container {
+            width: 100%;
+            height: 190px;
+            background-color: var(--game-bg);
+            border-bottom: 4px solid var(--text-color);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+
+        /* ไดโนเสาร์สุดน่ารัก */
+        #dino {
+            width: 38px;
+            height: 44px;
+            background-color: var(--dino-color);
+            position: absolute;
+            bottom: 0;
+            left: 50px;
+            border-radius: 12px 14px 4px 6px;
+            box-shadow: inset -3px -3px 0px rgba(0,0,0,0.15);
+        }
+        #dino::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            right: 8px;
+            width: 6px;
+            height: 6px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            box-shadow: 1px 0 0 #000;
+        }
+        #dino::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: 2px;
+            width: 6px;
+            height: 4px;
+            background-color: rgba(0,0,0,0.2);
+            border-radius: 2px;
+        }
+
+        /* สิ่งกีดขวาง (จะถูกเปลี่ยนรูปร่างและสีด้วย JavaScript) */
+        #obstacle {
+            position: absolute;
+            bottom: 0;
+            right: -40px;
+        }
+
+        .jump {
+            animation: jumpAnimation 0.5s cubic-bezier(0, 0.4, 0.6, 1);
+        }
+        @keyframes jumpAnimation {
+            0% { bottom: 0; }
+            50% { bottom: 110px; }
+            100% { bottom: 0; }
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            font-size: 16px;
+            width: 75%;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            outline: none;
+        }
+        
+        .difficulty-selector {
+            margin-bottom: 15px;
+        }
+        .difficulty-selector label {
+            margin: 0 10px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        button.action-btn {
+            padding: 10px 20px;
+            font-size: 15px;
+            background-color: var(--btn-bg);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin: 5px;
+            font-weight: 600;
+        }
+        button.action-btn:hover {
+            background-color: var(--btn-hover);
+            transform: translateY(-1px);
+        }
+        .secondary-btn {
+            background-color: #64748b !important;
+        }
+        .secondary-btn:hover {
+            background-color: #475569 !important;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: var(--game-bg);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <button class="theme-toggle" onclick="toggleTheme()">🌓 ธีม</button>
+
+        <h2>🦖 Dino Jump Adventure</h2>
+
+        <div id="login-screen" class="screen active">
+            <p>ยินดีต้อนรับสู่มินิเกมสุดน่ารัก!</p>
+            <input type="text" id="username" placeholder="พิมพ์ชื่อของคุณที่นี่..." autocomplete="off"><br>
+            
+            <div class="difficulty-selector">
+                <p style="margin: 5px 0 10px; font-size: 14px; opacity: 0.8;">เลือกระดับความยาก:</p>
+                <label><input type="radio" name="difficulty" value="easy" checked> โหมดง่าย (ปกติ)</label>
+                <label><input type="radio" name="difficulty" value="hard"> โหมดยาก (เร็วขึ้น + สิ่งกีดขวางสุ่ม)</label>
+            </div>
+
+            <button class="action-btn" onclick="startGame()">🚀 เริ่มเกมเลย</button><br>
+            <button class="action-btn secondary-btn" onclick="goHome()">🏠 กลับหน้าหลักเว็บ</button>
+        </div>
+
+        <div id="game-screen" class="screen">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-weight: 500;">
+                <span>ผู้เล่น: <span id="display-name" style="color: var(--btn-bg);"></span></span>
+                <span>โหมด: <span id="display-diff"></span></span>
+                <span>คะแนน: <span id="score">0</span></span>
+            </div>
+            
+            <div id="game-container">
+                <div id="dino"></div>
+                <div id="obstacle"></div>
+            </div>
+            <p style="font-size: 13px; opacity: 0.7; margin-bottom: 10px;">กดปุ่ม **Spacebar** หรือ **แตะ/คลิกที่หน้าจอเกม** เพื่อกระโดดหลบ</p>
+            <button class="action-btn secondary-btn" onclick="goHome()">🏠 กลับหน้าหลัก</button>
+        </div>
+
+        <div id="gameover-screen" class="screen">
+            <h3 style="color: var(--obstacle-color); margin-top: 5px;">🎮 Game Over!</h3>
+            <p>คะแนนที่คุณทำได้: <strong id="final-score" style="font-size: 18px;">0</strong></p>
+            
+            <button class="action-btn" onclick="restartGame()">🔄 เล่นอีกครั้ง</button>
+            <button class="action-btn secondary-btn" onclick="resetToLogin()">⚙️ เปลี่ยนชื่อ/ตั้งค่า</button>
+            <button class="action-btn secondary-btn" onclick="goHome()">🏠 กลับหน้าหลัก</button>
+
+            <h4 style="margin: 20px 0 5px;">🏆 ตารางคะแนนสูงสุด (High Scores)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>อันดับ</th>
+                        <th>ชื่อผู้เล่น</th>
+                        <th>โหมด</th>
+                        <th>คะแนน</th>
+                    </tr>
+                </thead>
+                <tbody id="scoreboard-list"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const loginScreen = document.getElementById('login-screen');
+        const gameScreen = document.getElementById('game-screen');
+        const gameoverScreen = document.getElementById('gameover-screen');
+        
+        const usernameInput = document.getElementById('username');
+        const displayName = document.getElementById('display-name');
+        const displayDiff = document.getElementById('display-diff');
+        const scoreDisplay = document.getElementById('score');
+        const finalScoreDisplay = document.getElementById('final-score');
+        
+        const dino = document.getElementById('dino');
+        const obstacle = document.getElementById('obstacle');
+        const scoreboardList = document.getElementById('scoreboard-list');
+
+        let playerName = "";
+        let currentDifficulty = "easy";
+        let score = 0;
+        let gameInterval;
+        let isPlaying = false;
+        let obstacleTypes = [];
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+
+        function goHome() {
+            alert("กำลังพาคุณกลับสู่หน้าหลักของเว็บไซต์...");
+            window.location.href = "index.html"; 
+        }
+
+        function startGame() {
+            playerName = usernameInput.value.trim();
+            if (!playerName) {
+                alert("กรุณากรอกชื่อก่อนเริ่มเล่นครับ!");
+                return;
+            }
+
+            const diffRadios = document.getElementsByName('difficulty');
+            for (const radio of diffRadios) {
+                if (radio.checked) {
+                    currentDifficulty = radio.value;
+                    break;
+                }
+            }
+
+            displayName.innerText = playerName;
+            displayDiff.innerText = currentDifficulty === 'easy' ? 'ง่าย 🟢' : 'ยาก 🔴';
+            
+            loginScreen.classList.remove('active');
+            gameScreen.classList.add('active');
+            gameoverScreen.classList.remove('active');
+
+            startAction();
+        }
+
+        function jump() {
+            if (!dino.classList.contains('jump')) {
+                dino.classList.add('jump');
+                setTimeout(() => {
+                    dino.classList.remove('jump');
+                }, 500);
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.code === 'Space' && isPlaying) {
+                event.preventDefault();
+                jump();
+            }
+        });
+
+        document.getElementById('game-container').addEventListener('click', function() {
+            if (isPlaying) jump();
+        });
+
+        // กำหนดรูปแบบสิ่งกีดขวางหลายๆ แบบ (ความกว้าง, ความสูง, รูปทรง CSS)
+        const obstacleDesigns = [
+            { width: '18px', height: '35px', radius: '6px 6px 2px 2px', bg: 'var(--obstacle-color)' }, // กระบองเพชรเดี่ยว
+            { width: '32px', height: '42px', radius: '10px 10px 2px 2px', bg: 'var(--obstacle-color-2)' }, // กระบองเพชรคู่หนา
+            { width: '25px', height: '26px', radius: '50% 50% 4px 4px', bg: '#8b5cf6' } // หินกลมแปลกตา
+        ];
+
+        function spawnNewObstacle() {
+            if (!isPlaying) return;
+            
+            // สุ่มเลือกรูปแบบสิ่งกีดขวาง
+            const randomDesign = obstacleDesigns[Math.floor(Math.random() * obstacleDesigns.length)];
+            obstacle.style.width = randomDesign.width;
+            obstacle.style.height = randomDesign.height;
+            obstacle.style.borderRadius = randomDesign.radius;
+            obstacle.style.backgroundColor = randomDesign.bg;
+
+            // ความเร็วและจังหวะตามโหมด
+            let duration = currentDifficulty === 'easy' ? '2.2s' : '1.1s'; // โหมดยากวิ่งเร็วขึ้นสะใจ
+            
+            obstacle.style.animation = 'none';
+            void obstacle.offsetWidth;
+            obstacle.style.animation = `blockMove ${duration} linear infinite`;
+        }
+
+        function startAction() {
+            score = 0;
+            isPlaying = true;
+            spawnNewObstacle();
+
+            let styleSheet = document.styleSheets[0];
+            try {
+                styleSheet.insertRule(`
+                    @keyframes blockMove {
+                        0% { right: -40px; }
+                        100% { right: 600px; }
+                    }
+                `, styleSheet.cssRules.length);
+            } catch (e) {}
+
+            gameInterval = setInterval(() => {
+                if (!isPlaying) return;
+
+                score++;
+                scoreDisplay.innerText = score;
+
+                // สุ่มเปลี่ยนหน้าตาสิ่งกีดขวางเมื่อมันวิ่งวนกลับมาเกิดใหม่
+                let obstacleRight = parseInt(window.getComputedStyle(obstacle).getPropertyValue("right"));
+                if (obstacleRight >= 560) {
+                    let randomDesign = obstacleDesigns[Math.floor(Math.random() * obstacleDesigns.length)];
+                    obstacle.style.width = randomDesign.width;
+                    obstacle.style.height = randomDesign.height;
+                    obstacle.style.borderRadius = randomDesign.radius;
+                    obstacle.style.backgroundColor = randomDesign.bg;
+                }
+
+                let dinoBottom = parseInt(window.getComputedStyle(dino).getPropertyValue("bottom"));
+                let obsWidth = parseInt(window.getComputedStyle(obstacle).getPropertyValue("width"));
+                let obsHeight = parseInt(window.getComputedStyle(obstacle).getPropertyValue("height"));
+
+                // ระบบเช็คการชนที่แม่นยำตามขนาดของสิ่งกีดขวางแต่ละแบบ
+                if (obstacleRight > (470 - obsWidth + 20) && obstacleRight < 515 && dinoBottom < obsHeight) {
+                    gameOver();
+                }
+            }, 100);
+        }
+
+        function gameOver() {
+            isPlaying = false;
+            clearInterval(gameInterval);
+            obstacle.style.animation = "none";
+
+            gameScreen.classList.remove('active');
+            gameoverScreen.classList.add('active');
+            finalScoreDisplay.innerText = score;
+
+            saveScore(playerName, currentDifficulty, score);
+            renderScoreboard();
+        }
+
+        function saveScore(name, diff, pts) {
+            let scores = JSON.parse(localStorage.getItem('dino_scores_v3')) || [];
+            scores.push({ name: name, diff: diff, score: pts });
+            scores.sort((a, b) => b.score - a.score);
+            scores = scores.slice(0, 5);
+            localStorage.setItem('dino_scores_v3', JSON.stringify(scores));
+        }
+
+        function renderScoreboard() {
+            let scores = JSON.parse(localStorage.getItem('dino_scores_v3')) || [];
+            scoreboardList.innerHTML = "";
+            
+            if (scores.length === 0) {
+                scoreboardList.innerHTML = `<tr><td colspan="4">ยังไม่มีประวัติคะแนน</td></tr>`;
+                return;
+            }
+
+            scores.forEach((item, index) => {
+                let diffText = item.diff === 'easy' ? 'ง่าย 🟢' : 'ยาก 🔴';
+                let row = `<tr>
+                    <td>${index + 1}</td>
+                    <td>${item.name}</td>
+                    <td>${diffText}</td>
+                    <td><b>${item.score}</b></td>
+                </tr>`;
+                scoreboardList.innerHTML += row;
+            });
+        }
+
+        function restartGame() {
+            gameoverScreen.classList.remove('active');
+            gameScreen.classList.add('active');
+            startAction();
+        }
+
+        function resetToLogin() {
+            gameoverScreen.classList.remove('active');
+            loginScreen.classList.add('active');
+            usernameInput.value = "";
+        }
+    </script>
+</body>
+</html>

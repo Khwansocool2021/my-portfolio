@@ -1,0 +1,78 @@
+[
+  {
+    "id": "traffic-signal",
+    "title": "ระบบควบคุมสัญญาณไฟจราจรอัจฉริยะตามปริมาณความหนาแน่น",
+    "image": "images/AUCC2025.png",
+    "gallery": ["images/AUCC2025.png", "images/AUCC1.jpg", "images/AUCC2.jpeg", "images/AUCC3.jpeg", "images/AUCC4.jpeg"],
+    "tags": ["ESP32", "IoT", "Blynk"],
+    "github": "files/AUCC2025.pdf",
+    "problem": "พบปัญหาความแม่นยำในการตรวจจับปริมาณรถยนต์ด้วยเซ็นเซอร์ Ultrasonic",
+    "solution": "ปรับปรุงโค้ดส่วนการจัดการ Loop และตรวจสอบสัญญาณไฟสถานะบนบอร์ด"
+  },
+  {
+    "id": "lora-mesh",
+    "title": "การพัฒนาระบบเครือข่ายเมชผ่านคลื่นวิทยุเพื่อการสื่อสารในภาวะฉุกเฉิน",
+    "image": "images/LoRa1.jpeg",
+    "gallery": ["images/LoRa1.jpeg", "images/LoRa2.jpeg", "images/LoRa3.jpeg", "images/LoRa4.jpeg", "images/LoRa5.jpeg", "images/LoRa6.jpeg", "images/LoRa7.jpeg"],
+    "tags": ["ESP32", "IoT", "LoRa", "Mesh Network" ,"RCS"],
+    "problem": "การสื่อสารในพื้นที่อับสัญญาณทำได้ยาก 1 เสาสัญญาณต่ออุปกรณ์ 1 เครื่อง สามารถส่งข้อความได้เพียง 200 ตัวอักษรต่อครั้ง",
+    "solution": "ออกแบบโครงข่ายแบบ Mesh เพื่อขยายระยะการส่งสัญญาณ"
+  },
+  {
+  "id": "web-skt",
+  "title": "สร้างเว็บไซต์ใหม่ วิทยาลัยเทคโนโลยีสงขลา เพื่อให้ทันยุคสมัยให้มากขึ้น",
+  "image": "images/SKT1.png",
+  "gallery": ["images/SKT1.png", "images/SKT2.png", "images/SKT3.png", "images/SKT4.png"],
+  "tags": ["PHP", "MySQL", "HTML", "CSS", "JavaScript"],
+  "github": "https://cherskt.42web.io",
+  "problem": "หน้าตาเว็บไซต์เดิมไม่ทันสมัย",
+  "solution": "ออกแบบเว็บไซต์ใหม่ให้ทันสมัยและใช้งานง่าย มีการเพิ่มเอกสารและข้อมูลที่เป็นประโยชน์ต่อผู้ใช้งาน"
+},
+    {
+  "id": "cisco-switch-kfc",
+  "title": "ติดตั้ง Switch Cisco เพิ่ม ร้าน KFC สาขาไดอาน่า หาดใหญ่",
+  "image": "images/Cisco5.jpeg",
+  "gallery": ["images/Cisco6.jpg", "images/Cisco3.jpeg", "images/Cisco1.jpeg", "images/Cisco2.jpeg"],
+  "tags": ["Network", "Cisco", "Switch", "Router", "LAN", "VLAN"],
+  "problem": "ต้องการเพิ่มประสิทธิภาพเครือข่ายและความเสถียรของระบบให้กับKFC",
+  "solution": "ติดตั้ง Switch Cisco ให้รองรับการเชื่อมต่อและจัดการเครือข่ายที่มีประสิทธิภาพ เพื่อรองรับกับระบบ POS และการเชื่อมต่ออินเทอร์เน็ตที่มีความเสถียร"
+},
+        {
+  "id": "NAS",
+  "title": "การจัดการจัดเก็บข้อมูลต่างๆไว้ในภายในองค์กรด้วย TrueNAS",
+  "image": "images/NAS1.png",
+  "gallery": ["images/NAS2.jpeg", "images/NAS3.jpeg", "images/NAS4.jpeg", "images/NAS5.jpeg"],
+  "tags": ["TrueNAS", "NAS", "Cloud Storage", "Storage"],
+  "github": "https://www.truenas.com",
+  "problem": "การจัดเก็บข้อมูลไม่เป็นระเบียบและไม่สามารถเข้าถึงข้อมูลได้อย่างรวดเร็ว",
+  "solution": "ติดตั้ง TrueNAS เพื่อจัดการและจัดเก็บข้อมูลต่างๆ ภายในองค์กรให้เป็นระเบียบและสามารถเข้าถึงข้อมูลได้อย่างรวดเร็วและทุกที่ภายในองค์กร"
+},
+        {
+  "id": "RUTS",
+  "title": "ระบบจองห้องเรียนคณะบริหารธุรกิจและเทคโนโลยีสารสนเทศ มหาวิทยาลัยเทคโนโลยีราชมงคลศรีวิชัย",
+  "image": "images/A1.png",
+  "gallery": ["images/A7.png", "images/A6.png", "images/A2.jpeg", "images/A3.png"],
+  "tags": ["MySQL", "PHP", "HTML", "CSS"],
+  "problem": "การจองห้องเรียนไม่เป็นระเบียบและไม่สามารถเข้าถึงข้อมูลได้อย่างรวดเร็ว",
+  "solution": "สร้างเว็บไซต์ระบบจองห้องเรียนเพื่อจัดการและจัดเก็บข้อมูลต่างๆ ภายในคณะให้เป็นระเบียบและสามารถเข้าถึงข้อมูลได้อย่างรวดเร็วและทุกที่ภายในคณะบริหารธุรกิจและเทคโนโลยีสารสนเทศ มหาวิทยาลัยเทคโนโลยีราชมงคลศรีวิชัย"
+},
+        {
+  "id": "PC",
+  "title": "ติดตั้งเครื่องคอมพิวเตอร์และระบบNetworkให้กับวิทยาลัยเทคโนโลยีสงขลา",
+  "image": "images/PC1.jpeg",
+  "gallery": ["images/PC2.jpeg", "images/PC3.jpeg", "images/PC4.jpeg"],
+  "tags": ["IT Support", "PC", "Network", "Windows", "Linux"],
+  "problem": "ระบบคอมพิวเตอร์และเครือข่ายในวิทยาลัยยังไม่ทันสมัยและมีปัญหาในการใช้งาน",
+  "solution": "ติดตั้งเครื่องคอมพิวเตอร์และระบบเครือข่ายให้กับวิทยาลัยเพื่อให้สามารถใช้งานได้อย่างมีประสิทธิภาพและทันสมัย"
+},
+        {
+  "id": "CCTV",
+  "title": "ติดตั้งกล้องวงจรปิดCCTVตามบ้านลูกค้า",
+  "image": "images/CCTV1.jpeg",
+  "gallery": ["images/CCTV2.jpeg", "images/CCTV3.jpeg", "images/CCTV4.jpeg", "images/CCTV5.jpeg", "images/CCTV6.jpeg", "images/CCTV7.jpeg"],
+  "tags": ["IT Support", "CCTV", "iP Camera", "Smart Home", "Camera"],
+  "problem": "ลูกค้าต้องการติดตั้งกล้องวงจรปิดCCTVเพื่อความปลอดภัยและสามารถดูภาพจากระยะไกลได้",
+  "solution": "ติดตั้งกล้องวงจรปิดCCTVตามบ้านลูกค้าและตั้งค่าให้สามารถดูภาพจากระยะไกลได้ผ่านมือถือหรือคอมพิวเตอร์"
+}
+
+]

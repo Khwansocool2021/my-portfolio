@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <title>Education | Khwan.dev</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+    <style>
+        body { min-height: 100vh; background: linear-gradient(135deg, #0ea5e9, #2563eb, #0f172a); background-size: 400% 400%; animation: waveMove 10s ease infinite; transition: background 0.5s; }
+        .dark body { background: linear-gradient(135deg, #020617, #1e3a8a, #0f172a, #020617); background-size: 400% 400%; }
+        @keyframes waveMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        
+        .outer-glow { position: relative; background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000); background-size: 400%; padding: 6px; border-radius: 3.5rem; animation: border-rotate 10s linear infinite; }
+        @keyframes border-rotate { 0% { background-position: 0% 50%; } 100% { background-position: 400% 50%; } }
+        
+        .content-box { background: #ffffff; border-radius: 3.2rem; padding: 4rem; transition: all 0.3s; }
+        .dark .content-box { background: rgba(30, 41, 59, 0.9); color: #f1f5f9; }
+        
+        .edu-item { transition: all 0.5s; padding: 2rem 1.5rem; position: relative; }
+        .edu-item:hover { transform: scale(1.03) translateX(15px); background: rgba(128, 128, 128, 0.1); border-radius: 2rem; }
+        
+        .logo-box { width: 6rem; height: 6rem; transition: all 0.6s; }
+        .logo-box:hover { box-shadow: 0 0 40px #38bdf8; transform: rotate(360deg) scale(1.1); }
+        
+        /* ปรับตำแหน่งเส้นให้ตรงกับกึ่งกลางรูป */
+        .timeline-line { position: absolute; left: -1px; top: 30px; bottom: 120px; width: 4px; background-color: #2563eb; }
+    </style>
+</head>
+<body class="p-6 md:py-20 flex justify-center items-center">
+
+    <div class="outer-glow max-w-3xl w-full">
+        <div class="content-box shadow-2xl relative">
+            <h1 class="text-5xl font-black mb-16 tracking-tighter text-center">ประวัติการศึกษา</h1>
+            
+            <div class="relative ml-16 space-y-20">
+                <!-- เส้น Timeline -->
+                <div class="timeline-line"></div>
+                
+                <div class="edu-item pl-16">
+                    <a href="https://www.rmutsv.ac.th" target="_blank" class="block cursor-pointer">
+                        <div class="logo-box absolute -left-[48px] -top-3 rounded-full border-4 border-white dark:border-slate-800 overflow-hidden bg-white shadow-2xl">
+                            <img src="images/si-logo.jpg" alt="University" class="w-full h-full object-cover">
+                        </div>
+                    </a>
+                    <h3 class="text-3xl font-bold">ปริญญาตรี</h3>
+                    <p class="text-xl opacity-80 mt-2 font-medium">มหาวิทยาลัยเทคโนโลยีราชมงคลศรีวิชัย</p>
+                    <p class="text-xl opacity-50 mt-1 font-medium">สาขา วิศวกรรมคอมพิวเตอร์</p>
+                </div>
+
+                <div class="edu-item pl-16">
+                    <a href="https://www.skt.ac.th" target="_blank" class="block cursor-pointer">
+                        <div class="logo-box absolute -left-[48px] -top-3 rounded-full border-4 border-white dark:border-slate-800 overflow-hidden bg-white shadow-2xl">
+                            <img src="images/skt.jpg" alt="School" class="w-full h-full object-cover">
+                        </div>
+                    </a>
+                    <h3 class="text-3xl font-bold">ประกาศนียบัตรวิชาชีพ</h3>
+                    <p class="text-xl opacity-80 mt-2 font-medium">วิทยาลัยเทคโนโลยีสงขลา (2566)</p>
+                    <p class="text-xl opacity-50 mt-1 font-medium">สาขา เทคนิคคอมพิวเตอร์</p>
+                </div>
+
+                <div class="edu-item pl-16">
+                    <a href="https://www.ts5.ac.th" target="_blank" class="block cursor-pointer">
+                        <div class="logo-box absolute -left-[48px] -top-3 rounded-full border-4 border-white dark:border-slate-800 overflow-hidden bg-white shadow-2xl">
+                            <img src="images/TS5.png" alt="School" class="w-full h-full object-cover">
+                        </div>
+                    </a>
+                    <h3 class="text-3xl font-bold">มัธยมศึกษา</h3>
+                    <p class="text-xl opacity-80 mt-2 font-medium">โรงเรียนเทศบาล 5 (วัดหัวป้อมนอก) (2562)</p>
+                </div>
+
+                <div class="edu-item pl-16">
+                    <a href="https://www.facebook.com/T1nakornnorkSongkhla/" target="_blank" class="block cursor-pointer">
+                        <div class="logo-box absolute -left-[48px] -top-3 rounded-full border-4 border-white dark:border-slate-800 overflow-hidden bg-white shadow-2xl">
+                            <img src="images/ts1.jpeg" alt="School" class="w-full h-full object-cover">
+                        </div>
+                    </a>
+                    <h3 class="text-3xl font-bold">ประถมศึกษา</h3>
+                    <p class="text-xl opacity-80 mt-2 font-medium">โรงเรียนเทศบาล 1 (ถนนนครนอก) (2560)</p>
+                </div>
+
+            </div>
+
+            <div class="mt-20 text-center">
+                <a href="index.html" class="inline-block px-12 py-4 bg-blue-600 hover:bg-blue-700 text-white text-xl font-bold rounded-full transition-all hover:scale-110 shadow-lg">กลับไปที่หน้าแรก</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>About Me | Khwan.dev</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: linear-gradient(180deg, #e0f2f1 0%, #81d4fa 50%, #0288d1 100%); background-size: 100% 200%; animation: waveMove 10s ease-in-out infinite; }
+        .dark body { background: linear-gradient(180deg, #020617 0%, #1e293b 50%, #0f172a 100%); }
+        @keyframes waveMove { 0%, 100% { background-position: 0% 0%; } 50% { background-position: 0% 100%; } }
+        
+        .outer-glow { position: relative; background: linear-gradient(45deg, #38bdf8, #818cf8, #22d3ee, #38bdf8); background-size: 300%; padding: 8px; border-radius: 3.2rem; animation: border-rotate 6s linear infinite; }
+        @keyframes border-rotate { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+        
+        .content-box { background: #ffffff; border-radius: 2.8rem; width: 100%; padding: 4rem; }
+        .dark .content-box { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        
+        /* ปรับ Typography ให้สวยงาม */
+        .text-content { line-height: 1.8; letter-spacing: 0.01em; }
+    </style>
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) { document.documentElement.classList.add('dark'); }
+        tailwind.config = { darkMode: 'class' }
+    </script>
+</head>
+<body class="text-gray-900 dark:text-gray-100 transition-colors duration-500 min-h-screen py-20 px-6 flex flex-col items-center">
+
+    <div class="max-w-3xl w-full outer-glow">
+        <section class="content-box shadow-2xl">
+            <h1 class="text-4xl font-black mb-10 tracking-tighter text-center">เกี่ยวกับฉัน</h1>
+            
+            <div class="mb-10 flex justify-center">
+                <div class="w-40 h-40 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center overflow-hidden border-4 border-white dark:border-slate-800 shadow-xl">
+                    <img src="images/Suphachoke.jpg" alt="Profile" class="w-full h-full object-cover" style="object-position: 50% -2%;">
+                </div>
+            </div>
+
+            <!-- ส่วนเนื้อหาที่จัดวางใหม่ -->
+            <div class="text-content text-left max-w-xl mx-auto space-y-6 text-lg text-gray-700 dark:text-gray-300">
+                <p>
+                    สวัสดีครับ ผม <strong>ศุภโชค นิยม</strong> นักศึกษาที่มุ่งเน้นการพัฒนาระบบเครือข่าย (Networking) และการบริหารจัดการระบบ (Systems Administration) 
+                    ด้วยความหลงใหลในการเชื่อมต่อโลกดิจิทัลเข้ากับอุปกรณ์ทางกายภาพ (IoT) ทำให้ผมมีประสบการณ์ตรงในการพัฒนาโปรเจกต์ ตั้งแต่ IT Support และ Network การวางระบบ LoRa Mesh ไปจนถึงการจัดการ Cloud Infrastructure บน AWS และ True NAS การจัดเก็บช้อมูลภายในองค์กร
+                </p>
+                <p>
+                    นี้คือบันทึกเส้นทางการเรียนรู้ของผม ที่ผสมผสานระหว่างทักษะด้าน Web Development, Network Lab และ IoT Implementation IT Support และการแก้ไขปัญหาอุปกรณ์อิเล็กทรอนิกส์ ผมได้เรียนรู้ที่จะสร้างสรรค์โซลูชันที่ไม่เพียงแค่ตอบสนองความต้องการของผู้ใช้งาน แต่ยังสามารถปรับตัวและพัฒนาได้ตามเทคโนโลยีที่เปลี่ยนแปลงอย่างรวดเร็ว
+                    ผมเชื่อมั่นในการสร้างสรรค์เทคโนโลยีที่ไม่ได้เป็นเพียงแค่โค้ด แต่เป็นโซลูชันที่นำไปใช้งานได้จริง เพื่อยกระดับประสิทธิภาพและความก้าวหน้าทางเทคโนโลยีครับ
+                </p>
+            </div>
+
+            <div class="mt-12 text-center">
+                <a href="index.html" class="inline-block px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full transition-all shadow-lg hover:scale-105">
+                    ← กลับไปที่หน้าแรก
+                </a>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>

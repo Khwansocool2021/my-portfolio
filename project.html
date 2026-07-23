@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Project Details | Khwan.dev</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* พื้นหลัง: น้ำทะเลกลางวัน/กลางคืน */
+        body { 
+            background: linear-gradient(180deg, #e0f2f1 0%, #81d4fa 50%, #0288d1 100%); 
+            background-size: 100% 200%; 
+            animation: waveMove 15s ease-in-out infinite; 
+            min-height: 100vh;
+            margin: 0;
+            transition: background 1s ease;
+        }
+        .dark body { 
+            background: linear-gradient(180deg, #020617 0%, #312e81 50%, #0f172a 100%); 
+            background-size: 100% 200%;
+            animation: waveMove 15s ease-in-out infinite;
+        }
+        @keyframes waveMove { 0%, 100% { background-position: 0% 0%; } 50% { background-position: 0% 100%; } }
+        
+        /* ปุ่มย้อนกลับ */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 9999px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+        }
+        .dark .back-btn {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        /* กล่องเนื้อหา */
+        .content-box { 
+            background: rgba(255, 255, 255, 0.7); 
+            backdrop-filter: blur(20px);
+            border-radius: 2.5rem; 
+            padding: 3rem; 
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+        }
+        .dark .content-box { 
+            background: rgba(15, 23, 42, 0.6); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+
+        /* แกลเลอรีเลื่อนอัตโนมัติ */
+        .marquee-container {
+            position: relative;
+            overflow: hidden;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+        .marquee-inner {
+            display: flex;
+            gap: 1.5rem;
+            width: max-content;
+            animation: marquee 30s linear infinite;
+            will-change: transform;
+            transform: translate3d(0, 0, 0);
+        }
+        .marquee-inner:hover {
+            animation-play-state: paused;
+        }
+        @keyframes marquee {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+            100% {
+                transform: translate3d(-50%, 0, 0);
+            }
+        }
+    </style>
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+        tailwind.config = { darkMode: 'class' }
+        window.addEventListener('DOMContentLoaded', () => {
+            const version = Date.now();
+            document.querySelectorAll('a[href]').forEach((link) => {
+                const href = link.getAttribute('href') || '';
+                if (!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('#')) return;
+                if (href.includes('v=')) return;
+                const separator = href.includes('?') ? '&' : '?';
+                link.setAttribute('href', `${href}${separator}v=${version}`);
+            });
+        });
+    </script>
+</head>
+<body class="text-gray-900 dark:text-gray-100 p-6 md:p-20 transition-colors duration-500">
+
+    <a href="index.html?v=1" class="back-btn mb-10">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+        Back to Home
+    </a>
+
+    <div class="max-w-4xl mx-auto">
+        <section class="content-box shadow-2xl">
+            <h1 id="title" class="text-5xl font-black mb-8 tracking-tighter">กำลังโหลดข้อมูล...</h1>
+            <img id="image" class="w-full h-auto max-h-[400px] object-cover rounded-[2rem] mb-10 shadow-lg bg-black/5 dark:bg-white/5">
+            
+            <div class="mb-8">
+                <h2 class="font-bold text-lg mb-4 text-gray-500 dark:text-gray-400">Tech Stack</h2>
+                <div id="tech-stack" class="flex flex-wrap gap-3"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-10">
+                <div class="bg-black/5 dark:bg-white/5 p-6 rounded-2xl">
+                    <h2 class="font-bold text-red-500 mb-2">Problem</h2>
+                    <p id="problem" class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed"></p>
+                </div>
+                <div class="bg-black/5 dark:bg-white/5 p-6 rounded-2xl">
+                    <h2 class="font-bold text-emerald-500 mb-2">Solution</h2>
+                    <p id="solution" class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed"></p>
+                </div>
+            </div>
+
+            <div class="mb-10">
+                <h2 class="font-bold text-lg mb-4 text-gray-500 dark:text-gray-400">Project Gallery</h2>
+                <div class="marquee-container">
+                    <div id="gallery-inner" class="marquee-inner"></div>
+                </div>
+            </div>
+
+            <a id="github-link" target="_blank" class="inline-block px-8 py-4 bg-blue-600 text-white font-bold rounded-full hover:scale-105 transition-all shadow-lg hover:shadow-blue-500/30">
+                View Portfolio
+            </a>
+        </section>
+    </div>
+
+    <script>
+        async function init() {
+            try {
+                const response = await fetch('data.json?t=' + Date.now(), { cache: 'no-store' });
+                const data = await response.json();
+                const fallbackImage = 'images/placeholder.svg';
+                
+                const urlParams = new URLSearchParams(window.location.search);
+                const idParam = urlParams.get('id');
+                const requestedId = idParam !== null ? String(idParam) : null;
+
+                const p = data.find((item, index) => {
+                    const itemId = item.id ?? item.slug ?? String(index);
+                    return String(itemId) === requestedId || String(index) === requestedId;
+                }) || (requestedId === null ? data[0] : null);
+                
+                if (!p) {
+                    document.getElementById('title').innerText = "ไม่พบโปรเจกต์ (ID: " + requestedId + " อาจจะไม่มีในรายการ)";
+                    console.log("รายการข้อมูลที่มีทั้งหมด:", data);
+                    return;
+                }
+
+                document.getElementById('title').innerText = p.title || 'Untitled Project';
+                const imageEl = document.getElementById('image');
+                imageEl.src = p.image || fallbackImage;
+                imageEl.onerror = function () {
+                    this.onerror = null;
+                    this.src = fallbackImage;
+                };
+                document.getElementById('problem').innerText = p.problem || '—';
+                document.getElementById('solution').innerText = p.solution || '—';
+
+                const githubLink = document.getElementById('github-link');
+                if (p.github) {
+                    githubLink.href = p.github;
+                    githubLink.textContent = 'View on Portfolio';
+                    githubLink.classList.remove('hidden');
+                } else {
+                    githubLink.classList.add('hidden');
+                }
+                
+                document.getElementById('tech-stack').innerHTML = (p.tags || []).map(t => 
+                    `<span class="px-4 py-2 bg-blue-500/10 text-blue-500 rounded-full text-sm font-semibold">${t}</span>`
+                ).join('');
+
+                const galleryInner = document.getElementById('gallery-inner');
+                const galleryImages = Array.isArray(p.gallery) && p.gallery.length ? p.gallery : [p.image || fallbackImage];
+                const galleryMarkup = galleryImages.map((img) => {
+                    const safeImg = img || fallbackImage;
+                    return `<img src="${safeImg}" onerror="this.onerror=null; this.src='${fallbackImage}';" class="min-w-[350px] h-64 object-cover rounded-2xl shadow-md flex-shrink-0">`;
+                }).join('');
+                galleryInner.innerHTML = galleryMarkup;
+            } catch (e) {
+                document.getElementById('title').innerText = "เกิดข้อผิดพลาดในการโหลดไฟล์ JSON";
+            }
+        }
+        init();
+    </script>
+</body>
+</html>

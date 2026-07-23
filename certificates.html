@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>เกียรติบัตร | Khwan.dev</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(180deg, #e0f2f1 0%, #81d4fa 50%, #0288d1 100%);
+            background-size: 100% 200%;
+            animation: waveMove 10s ease-in-out infinite;
+            min-height: 100vh;
+        }
+        .dark body {
+            background: linear-gradient(180deg, #020617 0%, #1e293b 50%, #0f172a 100%);
+            background-size: 100% 200%;
+            animation: waveMove 10s ease-in-out infinite;
+        }
+        @keyframes waveMove {
+            0%, 100% { background-position: 0% 0%; }
+            50% { background-position: 0% 100%; }
+        }
+        .content-box {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12);
+        }
+        .dark .content-box {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* ขยาย Popup ให้ใหญ่ขึ้นและอยู่กึ่งกลางหน้าจอ */
+        .viewer-page {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            overflow-y: auto;
+        }
+        .viewer-page.active {
+            display: flex;
+        }
+        .popup-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            max-width: 950px; /* ปรับขนาดความกว้างสูงสุดให้ใหญ่ขึ้น */
+            width: 100%;
+            margin: auto;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        .dark .popup-card {
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .viewer-page.active .popup-card {
+            transform: scale(1);
+        }
+        .popup-card img {
+            width: 100%;
+            height: auto;
+            max-height: 80vh; /* ขยายความสูงรูปให้แสดงผลได้ใหญ่เต็มตาขึ้น */
+            object-fit: contain;
+            border-radius: 1rem;
+        }
+        .viewer-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.8);
+            color: #0f172a;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+            z-index: 10;
+            cursor: pointer;
+        }
+        .viewer-close:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.05);
+        }
+        .dark .viewer-close {
+            background: rgba(30, 41, 59, 0.8);
+            color: #f8fafc;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .dark .viewer-close:hover {
+            background: rgba(30, 41, 59, 1);
+        }
+    </style>
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+        tailwind.config = { darkMode: 'class' }
+    </script>
+</head>
+<body class="text-gray-900 dark:text-gray-100 transition-colors duration-500">
+    <nav class="sticky top-0 z-50 backdrop-blur-2xl bg-white/30 dark:bg-black/30 border-b border-white/20">
+        <div class="max-w-6xl mx-auto px-6 py-6 flex justify-between items-center">
+            <a href="index.html" class="text-xl font-bold tracking-tighter">Khwan.dev</a>
+            <div class="flex items-center space-x-6 text-sm">
+                <a href="index.html" class="hover:text-blue-500">Home</a>
+                <a href="sop.html" class="hover:text-blue-500">แรงบันดาลใจ</a>
+                <a href="about.html" class="hover:text-blue-500">เกี่ยวกับฉัน</a>
+                <a href="activity.html" class="hover:text-blue-500">กิจกรรมที่เข้าร่วม</a>
+                <a href="certificates.html" class="hover:text-blue-500">เกียรติบัตร</a>
+                <a href="education.html" class="hover:text-blue-500">ประวัตการศึกษา</a>
+                <a href="game.html" class="hover:text-blue-500">Mini Game</a>
+                <a href="contact.html" class="hover:text-blue-500">Contact</a>
+                <button onclick="toggleTheme()" class="p-2 rounded-full bg-white/20 dark:bg-black/20 backdrop-blur">🌓</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-6 py-20">
+        <section class="content-box p-8 md:p-12">
+            <h1 class="text-4xl font-black tracking-tighter mb-8">เกียรติบัตร</h1>
+            <div class="grid gap-6 md:grid-cols-2">
+                <!-- ใบที่ 1 -->
+                <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <button type="button" class="block w-full text-left" onclick="openViewer('images/Certificates/C1.jpg', 'ทักษะสำหรับอนาคตในด้านปัญญาประดิษฐ์')" aria-label="ดูเกียรติบัตรที่ 1">
+                        <img src="images/Certificates/C1.jpg" alt="เกียรติบัตร 1" class="w-full h-64 md:h-72 object-cover object-center hover:scale-105 transition-transform duration-300 cursor-zoom-in">
+                    </button>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold">ทักษะสำหรับอนาคตในด้านปัญญาประดิษฐ์</h2>
+                    </div>
+                </article>
+
+                <!-- ใบที่ 2 -->
+                <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <button type="button" class="block w-full text-left" onclick="openViewer('images/Certificates/C2.png', 'CCNA: Introduction to Networks')" aria-label="ดูเกียรติบัตรที่ 2">
+                        <img src="images/Certificates/C2.png" alt="เกียรติบัตร 2" class="w-full h-64 md:h-72 object-cover object-center hover:scale-105 transition-transform duration-300 cursor-zoom-in">
+                    </button>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold">CCNA: Introduction to Networks</h2>
+                    </div>
+                </article>
+
+                <!-- ใบที่ 3 -->
+                <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <button type="button" class="block w-full text-left" onclick="openViewer('images/Certificates/C3.png', 'AWS Academy Graduate - Cloud Foundations')" aria-label="ดูเกียรติบัตรที่ 3">
+                        <img src="images/Certificates/C3.png" alt="เกียรติบัตร 3" class="w-full h-64 md:h-72 object-cover object-center hover:scale-105 transition-transform duration-300 cursor-zoom-in">
+                    </button>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold">AWS Academy Graduate - Cloud Foundations</h2>
+                    </div>
+                </article>
+
+                <!-- ใบที่ 4 -->
+                <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <button type="button" class="block w-full text-left" onclick="openViewer('images/Certificates/C4.png', 'AWS Academy Graduate - Cloud Web Application Builder')" aria-label="ดูเกียรติบัตรที่ 4">
+                        <img src="images/Certificates/C4.png" alt="เกียรติบัตร 4" class="w-full h-64 md:h-72 object-cover object-center hover:scale-105 transition-transform duration-300 cursor-zoom-in">
+                    </button>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold">AWS Academy Graduate - Cloud Web Application Builder</h2>
+                    </div>
+                </article>
+
+                <!-- ใบที่ 5 -->
+                <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <button type="button" class="block w-full text-left" onclick="openViewer('images/Certificates/C5.png', 'AWS Cloud Quest: Cloud Practitioner')" aria-label="ดูเกียรติบัตรที่ 5">
+                        <img src="images/Certificates/C5.png" alt="เกียรติบัตร 5" class="w-full h-64 md:h-72 object-cover object-center hover:scale-105 transition-transform duration-300 cursor-zoom-in">
+                    </button>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold">AWS Cloud Quest: Cloud Practitioner</h2>
+                    </div>
+                </article>
+
+                <!-- ใบที่ 6 -->
+                <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <button type="button" class="block w-full text-left" onclick="openViewer('images/Certificates/C6.png', 'AWS Cloud Quest: Generative AI Practitioner')" aria-label="ดูเกียรติบัตรที่ 6">
+                        <img src="images/Certificates/C6.png" alt="เกียรติบัตร 6" class="w-full h-64 md:h-72 object-cover object-center hover:scale-105 transition-transform duration-300 cursor-zoom-in">
+                    </button>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold">AWS Cloud Quest: Generative AI Practitioner</h2>
+                    </div>
+                </article>
+
+                                <!-- ใบที่ 7 -->
+                <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <button type="button" class="block w-full text-left" onclick="openViewer('images/Certificates/C7.png', 'Introduction to Programming with Python')" aria-label="ดูเกียรติบัตรที่ 7">
+                        <img src="images/Certificates/C7.png" alt="เกียรติบัตร 7" class="w-full h-64 md:h-72 object-cover object-center hover:scale-105 transition-transform duration-300 cursor-zoom-in">
+                    </button>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold">Introduction to Programming with Python</h2>
+                    </div>
+                </article>
+                                                <!-- ใบที่ 8 -->
+                <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <button type="button" class="block w-full text-left" onclick="openViewer('images/Certificates/C8.jpg', 'การประชุมวิชาการระดับปริญญาตรีด้านคอมพิวเตอร์ภูมิภาคเอเชีย ครั้งที่ 13 (AUCC2025)')" aria-label="ดูเกียรติบัตรที่ 8">
+                        <img src="images/Certificates/C8.jpg" alt="เกียรติบัตร 8" class="w-full h-64 md:h-72 object-cover object-center hover:scale-105 transition-transform duration-300 cursor-zoom-in">
+                    </button>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold">การประชุมวิชาการระดับปริญญาตรีด้านคอมพิวเตอร์ภูมิภาคเอเชีย ครั้งที่ 13 (AUCC2025)</h2>
+                    </div>
+                </article>
+
+                                                                <!-- ใบที่ 9 -->
+                <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <button type="button" class="block w-full text-left" onclick="openViewer('images/Certificates/C9.jpg', 'ได้เข้าร่วมโครงการอบรมเชิงปฏิบัติการอิเล็กทรอนิกส์อัจฉริยะเพื่อสร้างนวัตกรรมสำหรับสาขาวิชาช่างอุตสาหกรรม หลักสูตรประกาศนียบัตรวิชาชีพ (ปวช.)')" aria-label="ดูเกียรติบัตรที่ 9">
+                        <img src="images/Certificates/C9.jpg" alt="เกียรติบัตร 9" class="w-full h-64 md:h-72 object-cover object-center hover:scale-105 transition-transform duration-300 cursor-zoom-in">
+                    </button>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold">ได้เข้าร่วมโครงการอบรมเชิงปฏิบัติการอิเล็กทรอนิกส์อัจฉริยะเพื่อสร้างนวัตกรรมสำหรับสาขาวิชาช่างอุตสาหกรรม หลักสูตรประกาศนียบัตรวิชาชีพ (ปวช.)</h2>
+                    </div>
+                </article>
+
+                                                                <!-- ใบที่ 10 -->
+                <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <button type="button" class="block w-full text-left" onclick="openViewer('images/Certificates/C10.jpg', 'Cabling & Networking Contest #9')" aria-label="ดูเกียรติบัตรที่ 10">
+                        <img src="images/Certificates/C10.jpg" alt="เกียรติบัตร 10" class="w-full h-64 md:h-72 object-cover object-center hover:scale-105 transition-transform duration-300 cursor-zoom-in">
+                    </button>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold">Cabling & Networking Contest #9</h2>
+                    </div>
+                </article>
+
+                                                                                <!-- ใบที่ 11 -->
+                <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <button type="button" class="block w-full text-left" onclick="openViewer('images/Certificates/C11.jpg', 'The Hour of Code')" aria-label="ดูเกียรติบัตรที่ 11">
+                        <img src="images/Certificates/C11.jpg" alt="เกียรติบัตร 11" class="w-full h-64 md:h-72 object-cover object-center hover:scale-105 transition-transform duration-300 cursor-zoom-in">
+                    </button>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold">The Hour of Code</h2>
+                    </div>
+                </article>
+
+                    <!-- ใบที่ 12 -->
+                <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <button type="button" class="block w-full text-left" onclick="openViewer('images/Certificates/C12.jpg', 'การแข่งขันทักษะวิชาการ ระดับภาคใต้ ครั้งที่ 15')" aria-label="ดูเกียรติบัตรที่ 12">
+                        <img src="images/Certificates/C12.jpg" alt="เกียรติบัตร 12" class="w-full h-64 md:h-72 object-cover object-center hover:scale-105 transition-transform duration-300 cursor-zoom-in">
+                    </button>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold">การแข่งขันทักษะวิชาการ ระดับภาคใต้ ครั้งที่ 15</h2>
+                    </div>
+                </article>
+
+                                    <!-- ใบที่ 13 -->
+                <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <button type="button" class="block w-full text-left" onclick="openViewer('images/Certificates/C13.jpg', 'กิจกรรม การแข่งขันการสร้าง Webpage ประเภท Web Editor')" aria-label="ดูเกียรติบัตรที่ 13">
+                        <img src="images/Certificates/C13.jpg" alt="เกียรติบัตร 13" class="w-full h-64 md:h-72 object-cover object-center hover:scale-105 transition-transform duration-300 cursor-zoom-in">
+                    </button>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold">กิจกรรม การแข่งขันการสร้าง Webpage ประเภท Web Editor</h2>
+                    </div>
+                </article>
+
+                                                    <!-- ใบที่ 14 -->
+                <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <button type="button" class="block w-full text-left" onclick="openViewer('images/Certificates/C14.jpg', 'การแข่งขันทักษะทางวิชาการ ระดับภาคใต้ ครั้งที่ 14')" aria-label="ดูเกียรติบัตรที่ 13">
+                        <img src="images/Certificates/C14.jpg" alt="เกียรติบัตร 13" class="w-full h-64 md:h-72 object-cover object-center hover:scale-105 transition-transform duration-300 cursor-zoom-in">
+                    </button>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold">การแข่งขันทักษะทางวิชาการ ระดับภาคใต้ ครั้งที่ 14</h2>
+                    </div>
+                </article>
+
+
+                            <!-- ใบที่ 15 -->
+                <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <button type="button" class="block w-full text-left" onclick="openViewer('images/Certificates/C15.jpg', 'กิจกรรมการแข่งขันการสร้างหนังสืออิเล็กทรอนิกส์')" aria-label="ดูเกียรติบัตรที่ 13">
+                        <img src="images/Certificates/C15.jpg" alt="เกียรติบัตร 13" class="w-full h-64 md:h-72 object-cover object-center hover:scale-105 transition-transform duration-300 cursor-zoom-in">
+                    </button>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold">กิจกรรมการแข่งขันการสร้างหนังสืออิเล็กทรอนิกส์</h2>
+                    </div>
+                </article>
+
+                        <!-- ใบที่ 16 -->
+                <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <button type="button" class="block w-full text-left" onclick="openViewer('images/Certificates/C16.jpg', 'โครงการอบรมเยาวชนนักถ่ายภาพ')" aria-label="ดูเกียรติบัตรที่ 13">
+                        <img src="images/Certificates/C16.jpg" alt="เกียรติบัตร 13" class="w-full h-64 md:h-72 object-cover object-center hover:scale-105 transition-transform duration-300 cursor-zoom-in">
+                    </button>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold">โครงการอบรมเยาวชนนักถ่ายภาพ</h2>
+                    </div>
+                </article>
+
+                        <!-- ใบที่ 17 -->
+                <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <button type="button" class="block w-full text-left" onclick="openViewer('images/Certificates/C17.jpg', 'การแข่งขันการสร้างหนังสืออิเล็กทรอนิกส์ (E-book)')" aria-label="ดูเกียรติบัตรที่ 17">
+                        <img src="images/Certificates/C17.jpg" alt="เกียรติบัตร 17" class="w-full h-64 md:h-72 object-cover object-center hover:scale-105 transition-transform duration-300 cursor-zoom-in">
+                    </button>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold">การแข่งขันการสร้างหนังสืออิเล็กทรอนิกส์ (E-book)</h2>
+                    </div>
+                </article>
+
+                                        <!-- ใบที่ 18 -->
+                <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <button type="button" class="block w-full text-left" onclick="openViewer('images/Certificates/C18.jpg', 'การแข่งขันการสร้าง Webpage ประเภท Web Eat')" aria-label="ดูเกียรติบัตรที่ 18">
+                        <img src="images/Certificates/C18.jpg" alt="เกียรติบัตร 18" class="w-full h-64 md:h-72 object-cover object-center hover:scale-105 transition-transform duration-300 cursor-zoom-in">
+                    </button>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold">การแข่งขันการสร้าง Webpage ประเภท Web Eat</h2>
+                    </div>
+                </article>
+
+                                <!-- ใบที่ 19 -->
+                <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <button type="button" class="block w-full text-left" onclick="openViewer('images/Certificates/C19.jpg', 'การแข่งขันตอบคำถามความรู้ทั่วไป ระดับชั้น มัธยมศึกษาตอนต้น')" aria-label="ดูเกียรติบัตรที่ 19">
+                        <img src="images/Certificates/C19.jpg" alt="เกียรติบัตร 19" class="w-full h-64 md:h-72 object-cover object-center hover:scale-105 transition-transform duration-300 cursor-zoom-in">
+                    </button>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold">การแข่งขันตอบคำถามความรู้ทั่วไป ระดับชั้น มัธยมศึกษาตอนต้น</h2>
+                    </div>
+                </article>
+
+                <!-- ใบที่ 20 -->
+                <article class="rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white/70 dark:bg-neutral-900/60">
+                    <button type="button" class="block w-full text-left" onclick="openViewer('images/Certificates/C20.jpg', 'กิจกรรมค่าย เรารักดาราศาสตร์')" aria-label="ดูเกียรติบัตรที่ 20">
+                        <img src="images/Certificates/C20.jpg" alt="เกียรติบัตร 20" class="w-full h-64 md:h-72 object-cover object-center hover:scale-105 transition-transform duration-300 cursor-zoom-in">
+                    </button>
+                    <div class="p-6">
+                        <h2 class="text-xl font-bold">กิจกรรมค่าย เรารักดาราศาสตร์</h2>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- ส่วน Popup ขนาดใหญ่ขึ้น -->
+    <div id="viewerPage" class="viewer-page" role="dialog" aria-modal="true" onclick="closeViewerOnBackground(event)">
+        <div class="popup-card" onclick="event.stopPropagation()">
+            <button type="button" class="viewer-close" onclick="closeViewer()" aria-label="ปิดภาพ">✕</button>
+            <img id="viewerImage" src="" alt="">
+            <h3 id="viewerTitle" class="text-xl font-bold mt-4 text-center"></h3>
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+        }
+
+        function openViewer(src, title) {
+            const viewer = document.getElementById('viewerPage');
+            const image = document.getElementById('viewerImage');
+            const titleEl = document.getElementById('viewerTitle');
+            
+            image.src = src;
+            image.alt = title;
+            titleEl.innerText = title;
+            
+            viewer.classList.add('active');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeViewer() {
+            const viewer = document.getElementById('viewerPage');
+            viewer.classList.remove('active');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        function closeViewerOnBackground(event) {
+            if (event.target.id === 'viewerPage') {
+                closeViewer();
+            }
+        }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                closeViewer();
+            }
+        });
+    </script>
+</body>
+</html>
